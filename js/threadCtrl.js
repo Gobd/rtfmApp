@@ -1,17 +1,15 @@
-angular.module('app').controller('threadCtrl', function($scope, $firebaseObject, $firebaseArray, threadSvc, threadRef, commentsRef){
+angular.module('app').controller('threadCtrl', function($scope, $firebaseObject, $firebaseArray, threadSvc, threadRef, commentsRef, userService){
 
   var thread = $firebaseObject(threadRef);
 
-  thread.$bindTo($scope, 'thread');
+  $scope.user = userService.getUser();
 
-  $scope.createThread = function () {
-    $scope.threads.$add($scope.newThread);
-  };
+  thread.$bindTo($scope, 'thread');
 
   $scope.comments = $firebaseArray(commentsRef);
 
   $scope.createComment = function(){
-    $scope.comments.$add($scope.newComment);
+    $scope.comments.$add({text: $scope.newCommentText, username: $scope.user.password.email});
   };
 
 });

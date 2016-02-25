@@ -1,18 +1,30 @@
 <div>
     <p>Threads</p>
 
+    <div ng-if="user">
+      Email: {{user.password.email}}
+      <br/>
+      <img ng-src="{{user.password.profileImageURL}}"/>
+      <a href="#/logout">Logout</a>
+    </div>
+
     <form name="newThreadForm">
-        <input type="text" ng-model="newThread.title" placeholder="New thread title..." required/>
-        <input type="text" ng-model="newThread.username" placeholder="Username..." required/>
-        <button ng-disabled="newThreadForm.$invalid" ng-click="createThread(username, newThreadTitle)">Add Thread</button>
+        <input type="text" ng-model="newThreadTitle" placeholder="New thread title..." required/>
+        <button ng-disabled="newThreadForm.$invalid" ng-click="createThread()">Add Thread</button>
     </form>
 
     <ul>
         <li ng-repeat="thread in threads">
             <a ui-sref="thread({threadId: thread.$id})">
                 <span>{{ thread.title }}</span>
-                <span>(by {{ thread.username }})</span>
+                <span>(by {{user.password.email})</span>
             </a>
         </li>
     </ul>
+
+<div ng-if="!user">
+  <a href="#/login">Login</a>
+  <a href="#/signup">Signup</a>
+</div>
+
 </div>

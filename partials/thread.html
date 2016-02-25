@@ -2,12 +2,16 @@
     <h1>{{ thread.title }} (by {{ thread.username }})</h1>
 
     <form name="newCommentForm">
-        <input type="text" ng-model="newComment.text" placeholder="Write a comment..." required/>
-        <input type="text" ng-model="newComment.username" placeholder="Username..." required/>
+        <input type="text" ng-model="newCommentText" placeholder="Write a comment..." required/>
         <button ng-disabled="newCommentForm.$invalid" ng-click="createComment()">Add Comment</button>
     </form>
 
     <ul>
         <li ng-repeat="comment in comments">{{ comment.username }}: {{ comment.text }}</li>
     </ul>
+
+    <div>
+      <a href="#/threads">Home</a>
+    </div>
+
 </div>
